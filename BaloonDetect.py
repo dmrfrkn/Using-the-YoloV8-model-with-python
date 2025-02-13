@@ -3,19 +3,19 @@ from ultralytics import YOLO
 
 model = YOLO("E:/Teknofest Sema İha Takimi/SEMAVSCODE/HavaSavunma/HavaSavunmaBest.pt")
 
-print("Model yüklendi.")
+print("Model downloaded.")
 cap = cv2.VideoCapture(0)
-print("Kamera baslatildi.")
+print("Cam is started.")
 while True:
     ret, frame = cap.read()
     if not ret:
-        print("Kamera kaynagi okunamadi!")
+        print("Cam is not working!")
         break
     results = model(frame)
 
     for result in results:
-        boxes = result.boxes.xyxy.cpu().numpy()  # x_min, y_min, x_max, y_max
-        class_ids = result.boxes.cls.cpu().numpy()  # Class IDs
+        boxes = result.boxes.xyxy.cpu().numpy()  
+        class_ids = result.boxes.cls.cpu().numpy() 
 
         for box,  class_id in zip(boxes,  class_ids):
             x_min, y_min, x_max, y_max = map(int, box)
